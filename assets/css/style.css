@@ -22,7 +22,8 @@
 }
 
 .container,
-.blog {
+.blog,
+footer {
   width: 100%;
   max-width: 1050px;
   margin: 0 auto;
@@ -73,6 +74,16 @@ main {
 ul,
 ol {
   padding: 1rem 3rem;
+}
+
+/***** Footer  *****/
+
+footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /***** typos *****/
