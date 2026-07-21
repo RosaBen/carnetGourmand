@@ -104,7 +104,7 @@ textarea {
   height: 7rem;
 }
 
-button {
+.publish {
   width: 300px;
   background-color: #2563eb;
   border: none;
@@ -128,9 +128,10 @@ button {
 
 .delete-card {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
   cursor: pointer;
+  background-color: white;
+  border: none;
 }
 
 /***** Footer  *****/
@@ -154,7 +155,7 @@ p {
   color: #6b7280;
 }
 
-button {
+.publish {
   font-size: 0.875rem;
   color: white;
   font-family:
