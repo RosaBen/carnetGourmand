@@ -42,28 +42,27 @@
               <h3>Laisser un commentaire </h3>
               <form>
                 <div class="nameField"><label for="firstname">Votre nom</label>
-                  <input type="text" placeholder="Ex : Léa" id="firstname" minlength="2" required>
+                  <input type="text" placeholder="Ex : Léa" id="firstname" required>
                   <p class="name-message">Minimum 2 caractères</p>
                 </div>
                 <div><label for="comment">Votre commentaire</label>
-                  <textarea name="comment" id="comment" placeholder="Votre avis sur la recette..." minlength="10"
-                    required></textarea>
+                  <textarea name="comment" id="comment" placeholder="Votre avis sur la recette..." required></textarea>
                   <p class="comment-message">Minimum 10 caractères</p>
                 </div>
                 <button type="submit" class="publish">Publier</button>
-                <p class="error-message name-input"></p>
-                <p class="error-message comment-input"></p>
+                <p class="error-message name-input">Le nom doit contenir au moins 2 caractères.</p>
+                <p class="error-message comment-input">Le commentaire doit contenir au moins 10 caractères.</p>
               </form>
             </section>
             <section>
               <h3>Commentaires</h3>
               <div class="cards">
-                <div class="card">
+                <!-- <div class="card">
                   <h4>Téo</h4>
                   <p>Superbe recette!</p>
-                  <button class="delete-card">
-                    &#x1F5D1;&#xFE0F; Supprimer
-                  </button>
+                                    <button class="delete-card">
+                                      &#x1F5D1;&#xFE0F; Supprimer
+                                    </button>
                 </div>
                 <div class="card">
                   <h4>Téo</h4>
@@ -71,7 +70,7 @@
                   <button class="delete-card">
                     &#x1F5D1;&#xFE0F; Supprimer
                   </button>
-                </div>
+                </div> -->
               </div>
             </section>
           </aside>
@@ -83,6 +82,7 @@
         </footer>
       </div>
     </div>
+    <script src="https://kit.fontawesome.com/938df4913f.js" crossorigin="anonymous"></script>
     <script type="module" src="./assets/js/script.js"></script>
   </body>
 

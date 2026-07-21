@@ -1,5 +1,5 @@
 
-// data
+// data ******
 const recipes = [
   {
     title: "Pâtes crémeuses au citron",
@@ -8,12 +8,10 @@ const recipes = [
   },
 ];
 
-const errorMessages = ["Le nom doit contenir au moins 2 caractères.", "Le commentaire doit contenir au moins 10 caractères."];
-
-const commentsSection = [];
+let commentsSection = [];
 
 
-// recipe section
+// recipe section ******
 const recipeTitle = document.querySelector(".recipes h2");
 recipeTitle.textContent = recipes[0].title;
 
@@ -31,71 +29,106 @@ const preparationSteps = recipes[0].preparation.map(step => {
   preparationContainer.appendChild(li);
 });
 
-// comments section
+// comments section ******
 
-// validation fields when the name typed has less than 2 characters
+const form = document.querySelector("form");
 const firstnameInput = document.getElementById("firstname");
-
-const pNameMsg = document.querySelector(".name-input");
-pNameMsg.textContent = errorMessages[0];
-const pCommentMsg = document.querySelector(".comment-input");
-pCommentMsg.textContent = errorMessages[1];
-
-firstnameInput.addEventListener("change", function (e) {
-  if (event.target.value.trim().length <= 2) {
-    return pNameMsg.style.display = "block";
-  } else {
-    return pNameMsg.style.display = "none";
-  }
-
-});
-
-// validation fields when the comment typed has less than 10 characters
-
 const commentTextarea = document.getElementById("comment");
+const pNameMsg = document.querySelector(".name-input");
+const pCommentMsg = document.querySelector(".comment-input");
+const cardsSection = document.querySelector(".cards");
 
-commentTextarea.addEventListener("change", function (e) {
-  if (e.target.value.trim().length <= 10) {
-    return pCommentMsg.style.display = "block";
-  } else {
-    return (
-      pCommentMsg.style.display = "none"
+// 1- show error message
 
-    );
-  }
-});
-
-
-// publish button and save data
-
-
-const publishBtn = document.querySelector(".publish");
-
-function handleSubmit (e) {
-  e.preventDefault();
-  const name = firstnameInput.value.trim();
-  const comment = commentTextarea.value.trim();
-  const data = { firstname: name, comment: comment };
+function showErrorMessage () {
   let valid = true;
-  if (name.length <= 2) {
+
+  if (firstnameInput.value.trim().length < 3) {
     pNameMsg.style.display = "block";
     valid = false;
   } else {
     pNameMsg.style.display = "none";
   }
 
-  if (comment.length <= 10) {
+  if (commentTextarea.value.trim().length < 11) {
     pCommentMsg.style.display = "block";
     valid = false;
   } else {
     pCommentMsg.style.display = "none";
   }
 
-  if (!valid) return;
-
-  commentsSection.push(data);
-  firstnameInput.value = "";
-  commentTextarea.value = "";
+  return valid;
 }
 
-publishBtn.addEventListener("click", handleSubmit);
+// 3-get data from local storage
+
+const savedComments = localStorage.getItem("comments");
+if (savedComments) {
+  commentsSection = JSON.parse(savedComments);
+}
+
+// 4- display comments
+
+function displayComments (array) {
+
+  cardsSection.innerHTML = "";
+  const savedComments = localStorage.getItem("comments");
+  if (savedComments) {
+    array = JSON.parse(savedComments);
+  }
+
+
+  const comments = array.forEach(element => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const h4 = document.createElement("h4");
+    h4.textContent = `${element.name}`;
+
+    const p = document.createElement("p");
+    p.textContent = `${element.comment}`;
+
+    const button = document.createElement("button");
+    button.classList.add("delete-card");
+    button.textContent = `🗑️ Supprimer`;
+
+    card.appendChild(h4);
+    card.appendChild(p);
+    card.appendChild(button);
+    cardsSection.appendChild(card);
+  });
+  return comments;
+}
+
+// 5- submit form
+function handleSubmit (e) {
+  e.preventDefault();
+  const isValid = showErrorMessage();
+
+  if (!isValid) {
+    return;
+  }
+
+  const data = {
+    name: firstnameInput.value.trim(),
+    comment: commentTextarea.value.trim()
+  };
+
+  commentsSection.unshift(data);
+
+  localStorage.setItem("comments", JSON.stringify(commentsSection));
+  displayComments([data]);
+  firstnameInput.value = "";
+  commentTextarea.value = "";
+  pNameMsg.style.display = "none";
+  pCommentMsg.style.display = "none";
+}
+
+// 6- events listeners
+firstnameInput.addEventListener("input", showErrorMessage);
+commentTextarea.addEventListener("input", showErrorMessage);
+form.addEventListener("submit", handleSubmit);
+
+
+
+
