@@ -41,7 +41,7 @@
             <section>
               <h3>Laisser un commentaire </h3>
               <form>
-                <div><label for="firstname">Votre nom</label>
+                <div class="nameField"><label for="firstname">Votre nom</label>
                   <input type="text" placeholder="Ex : Léa" id="firstname" minlength="2" required>
                   <p class="name-message">Minimum 2 caractères</p>
                 </div>
@@ -51,7 +51,8 @@
                   <p class="comment-message">Minimum 10 caractères</p>
                 </div>
                 <button type="submit" class="publish">Publier</button>
-                <p class="error-message">Le nom doit contenir au moins 2 caractères.</p>
+                <p class="error-message name-input"></p>
+                <p class="error-message comment-input"></p>
               </form>
             </section>
             <section>

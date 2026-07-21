@@ -211,6 +211,12 @@ label {
   padding: 0.5rem;
   border-radius: 0.75rem;
   margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.name-input,
+.comment-input {
+  display: none;
 }
 
 .card p {
@@ -221,6 +227,13 @@ label {
 .delete-card p {
   color: #dc2626;
   font-weight: 600;
+}
+
+/* Error messages */
+
+.name-message,
+.comment-message {
+  font-size: 0.875rem;
 }
 
 /* responsive breakpoint 900px */
