@@ -37,6 +37,8 @@ const commentTextarea = document.getElementById("comment");
 const pNameMsg = document.querySelector(".name-input");
 const pCommentMsg = document.querySelector(".comment-input");
 const cardsSection = document.querySelector(".cards");
+const allcards = document.querySelectorAll(".card");
+const deleteBtn = document.querySelectorAll(".delete-card");
 
 // 1- show error message
 
@@ -78,7 +80,7 @@ function displayComments (array) {
   }
 
 
-  const comments = array.forEach(element => {
+  const comments = array.forEach((element, index) => {
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -91,6 +93,8 @@ function displayComments (array) {
     const button = document.createElement("button");
     button.classList.add("delete-card");
     button.textContent = `🗑️ Supprimer`;
+    button.dataset.index = index;
+
 
     card.appendChild(h4);
     card.appendChild(p);
@@ -124,10 +128,24 @@ function handleSubmit (e) {
   pCommentMsg.style.display = "none";
 }
 
+// 7- delete comment
+
+function deleteComment (e) {
+  if (e.target.classList.contains("delete-card")) {
+    const index = e.target.dataset.index;
+    commentsSection.splice(index, 1);
+    localStorage.setItem("comments", JSON.stringify(commentsSection));
+  }
+  displayComments(commentsSection);
+
+}
+
 // 6- events listeners
 firstnameInput.addEventListener("input", showErrorMessage);
 commentTextarea.addEventListener("input", showErrorMessage);
 form.addEventListener("submit", handleSubmit);
+cardsSection.addEventListener("click", deleteComment)
+
 
 
 
