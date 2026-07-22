@@ -128,7 +128,7 @@ function handleSubmit (e) {
   pCommentMsg.style.display = "none";
 }
 
-// 7- delete comment
+// 6- delete comment
 
 function deleteComment (e) {
   if (e.target.classList.contains("delete-card")) {
@@ -139,6 +139,10 @@ function deleteComment (e) {
   displayComments(commentsSection);
 
 }
+
+// 7- display old comments when refresh page
+
+displayComments(commentsSection);
 
 // 6- events listeners
 firstnameInput.addEventListener("input", showErrorMessage);
